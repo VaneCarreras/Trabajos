@@ -1,0 +1,46 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Log in";
+}
+
+<h1>@ViewData["Title"]</h1>
+<div class="row">
+    <div class="col-md-6">
+        <section>
+            <div class="card bg-gradient text-white shadow-lg">
+                <div class="card-body">
+                    <h2 class="card-title text-center mb-4">Inicio de Sesión</h2>
+                    <form id="account" method="post">
+                        <div class="mb-3">
+                            <input asp-for="Input.Email" class="form-control form-control-lg bg-transparent text-white" autocomplete="username" aria-required="true" placeholder="Correo Electrónico">
+                        </div>
+                        <div class="mb-3">
+                            <input asp-for="Input.Password" class="form-control form-control-lg bg-transparent text-white" autocomplete="current-password" aria-required="true" placeholder="Contraseña">
+                        </div>
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" asp-for="Input.RememberMe" />
+                            <label class="form-check-label text-muted" asp-for="Input.RememberMe">Recordarme</label>
+                        </div>
+                        <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-outline-warning">Iniciar Sesión</button>
+                    </form>
+                    <div class="text-center mt-4">
+                        <a id="forgot-password" asp-page="./ForgotPassword" class="text-decoration-none text-primary">¿Olvidaste tu contraseña?</a><br>
+                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl" class="text-decoration-none text-primary">Registrarse como nuevo usuario</a><br>
+                        <a id="resend-confirmation" asp-page="./ResendEmailConfirmation" class="text-decoration-none text-primary">Reenviar confirmación de correo electrónico</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+</div>
+
+
+
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

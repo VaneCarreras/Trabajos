@@ -1,0 +1,53 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+.body1 {
+  background-color: #2653ce;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.container1 {
+  max-width: 800px;
+  margin: 50px auto;
+  text-align: center;
+}
+
+.h11 {
+  font-size: 2.5em;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.img1 {
+  width: 400px;
+  margin-bottom: 20px;
+}
+
+.custom-table {
+  background-color: #6faa09; /* Verde limón */
+}
+
+.letra {
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
