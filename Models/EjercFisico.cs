@@ -51,6 +51,22 @@ namespace Trabajos.Models
 
     public class VistaEjercicioFisico
     {   
+        public int EjercicioFisicoID { get; set; }
+        public int TipoEjercFisicoID { get; set; }
+        public string? TipoEjercFisicoNombre {get; set; }
+        public DateTime Inicio { get; set; }
+        public string? InicioNombre { get; set; }
+        public DateTime Fin { get; set; }
+        public string? FinNombre { get; set; }
+        public EstadoEmocional EstadoEmocionalInicio {get; set; } 
+        public string? EstadoEmocionalInicioNombre {get; set; }
+        public EstadoEmocional EstadoEmocionalFin {get; set; } 
+        public string? EstadoEmocionalFinNombre {get; set; }
+        public string? Observaciones {get; set; }
+    }
+
+    public class VistaPorDiaEjercicioFisico
+    {   
         public int Anio {get; set; }  
         public string? Mes { get; set; }
         public int? Dia { get; set; }

@@ -6,18 +6,18 @@ function ListadoEjercicios(){
         data: {},
         type: 'POST',
         dataType: 'json',
-        success: function (ejercFisicos) {
+        success: function (vistaEjercicioFisico) {
             $("#ModalEjercFisico").modal("hide");
             LimpiarModal();
             let contenidoTabla = ``;
-            $.each(ejercFisicos, function (index, ejercFisico) {  
+            $.each(vistaEjercicioFisico, function (index, ejercFisico) {  
                 contenidoTabla += `
                     <tr>  
-                        <td>${ejercFisico.tipoEjercFisicoID}</td>
-                        <td>${ejercFisico.inicio}</td>
-                        <td>${ejercFisico.fin}</td>
-                        <td>${ejercFisico.estadoEmocionalInicio}</td>
-                        <td>${ejercFisico.estadoEmocionalFin}</td>
+                        <td>${ejercFisico.tipoEjercFisicoNombre}</td>
+                        <td>${ejercFisico.inicioNombre}</td>
+                        <td>${ejercFisico.estadoEmocionalInicioNombre}</td>
+                        <td>${ejercFisico.finNombre}</td>
+                        <td>${ejercFisico.estadoEmocionalFinNombre}</td>
                         <td>${ejercFisico.observaciones}</td>
                         <td class="text-center">
                             <button type="button" class="btn btn-success" onclick="AbrirModalEditar(${ejercFisico.ejercicioFisicoID})">
@@ -60,8 +60,8 @@ function AbrirModalEditar(EjercicioFisicoID){
         data: { id: EjercicioFisicoID},
         type: 'POST',
         dataType: 'json',
-        success: function (ejercFisicos) {
-            let ejercFisico = ejercFisicos[0];
+        success: function (vistaEjercicioFisico) {
+            let ejercFisico = vistaEjercicioFisico[0];
             document.getElementById("EjercicioFisicoID").value = EjercicioFisicoID;
             $("#ModalTitulo").text("Editar Ejercicio");
             document.getElementById("TipoEjercFisicoID").value = ejercFisico.tipoEjercFisicoID;

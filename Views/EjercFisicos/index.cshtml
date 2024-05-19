@@ -8,9 +8,6 @@
 
 <!-- Button trigger modal -->
 <div class="mb-2">
-  <button type="button" class="btn btn-primary" onclick="ListadoEjercicios()">
-    Cargar datos
-  </button>
   <button type="button" class="btn btn-primary" onclick="NuevoRegistro()" data-bs-toggle="modal"
     data-bs-target="#ModalEjercFisico">
     Nuevo Registro
@@ -57,9 +54,9 @@
               @Html.DropDownList("EstadoEmocionalFin", null, htmlAttributes: new { @class = "form-control" })
             </div>
 
-            <div class="mb-12 col-6">
+            <div class="mb-12 col-12">
               <label for="Observaciones" class="form-label">Observaciones</label>
-              <input type="text" class="form-control" id="observaciones" style="text-transform:uppercase" placeholder="Observaciones">
+              <textarea id="observaciones" class="form-control"></textarea>
             </div>
           </div>
         </form>
@@ -76,12 +73,12 @@
 <table class="table table-light table-bordered table-striped table-condensed">
   <thead>
     <tr>
-      <th>ID Tipo</th>
+      <th>Tipo</th>
       <th>Inicio</th>
-      <th>Fin</th>
       <th>Estado Emocional Inicio</th>
+      <th>Fin</th>
       <th>Estado Emocional Fin</th>
-      <th>Descripción</th>
+      <th>Observaciones</th>
       <th style="width: 70px"></th>
       <th style="width: 70px"></th>
     </tr>

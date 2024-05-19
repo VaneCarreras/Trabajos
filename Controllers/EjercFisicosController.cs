@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Linq;
 using System.Diagnostics.Tracing;
+using Microsoft.EntityFrameworkCore;
 
 namespace Trabajos.Controllers;
 
@@ -53,7 +54,7 @@ namespace Trabajos.Controllers;
     public JsonResult ListadoEjercicios(int? id)
     {
         //DEFINIMOS UNA VARIABLE EN DONDE GUARDAMOS EL LISTADO COMPLETO DE EJERCICIOS
-        var ejercicios = _context.EjercFisicos.ToList();
+        var ejercicios = _context.EjercFisicos.Include(t => t.TipoEjercFisico).ToList();
 
         //LUEGO PREGUNTAMOS SI EL USUARIO INGRESO UN ID
         //QUIERE DECIR QUE QUIERE UN EJERCICIO EN PARTICULAR
@@ -62,12 +63,30 @@ namespace Trabajos.Controllers;
             //FILTRAMOS EL LISTADO COMPLETO DE EJERCICIOS POR EL EJERCICIO QUE COINCIDA CON ESE ID
             ejercicios = ejercicios.Where(e => e.EjercicioFisicoID == id).ToList();
         }
+        
+        var vistaEjercicioFisico = ejercicios
+        .Select(e => new VistaEjercicioFisico
+        {
+            EjercicioFisicoID = e.EjercicioFisicoID,
+            TipoEjercFisicoID = e.TipoEjercFisicoID,
+            TipoEjercFisicoNombre = e.TipoEjercFisico.Nombre,
+            Inicio = e.Inicio,
+            InicioNombre = e.Inicio.ToString("dd/MM/yyyy HH:mm"),
+            Fin = e.Fin,
+            FinNombre = e.Fin.ToString("dd/MM/yyyy HH:mm"),
+            EstadoEmocionalFin = e.EstadoEmocionalFin,
+            EstadoEmocionalFinNombre = e.EstadoEmocionalFin.ToString(),
+            EstadoEmocionalInicio = e.EstadoEmocionalInicio,
+            EstadoEmocionalInicioNombre = e.EstadoEmocionalInicio.ToString(),
+            Observaciones = e.Observaciones
+        })
+        .ToList();
 
-        return Json(ejercicios);
+        return Json(vistaEjercicioFisico);
     }
 
-    public JsonResult AgregarUnEjercFisico(int ejercicioFisicoID, int tipoEjercFisicoID, DateTime inicio, DateTime fin, 
-    EstadoEmocional estadoEmocionalInicio, EstadoEmocional estadoEmocionalFin, string observaciones)
+        public JsonResult AgregarUnEjercFisico(int ejercicioFisicoID, int tipoEjercFisicoID, DateTime inicio, DateTime fin, 
+        EstadoEmocional estadoEmocionalInicio, EstadoEmocional estadoEmocionalFin, string observaciones)
     {
        
         string resultado = "";
@@ -108,8 +127,8 @@ namespace Trabajos.Controllers;
 
                         ejercicioEditar.TipoEjercFisicoID = tipoEjercFisicoID;
                         ejercicioEditar.Inicio = inicio;
-                        ejercicioEditar.Fin = fin;
                         ejercicioEditar.EstadoEmocionalInicio = estadoEmocionalInicio;
+                        ejercicioEditar.Fin = fin;
                         ejercicioEditar.EstadoEmocionalFin = estadoEmocionalFin;
                         ejercicioEditar.Observaciones = observaciones;
                         _context.SaveChanges();
@@ -126,7 +145,8 @@ namespace Trabajos.Controllers;
         return Json(resultado);
     }
 
-    public JsonResult EliminarEjercicio(int EjercicioFisicoID)
+    
+        public JsonResult EliminarEjercicio(int EjercicioFisicoID)
     {
         var ejercicio = _context.EjercFisicos.Find(EjercicioFisicoID);
         _context.Remove(ejercicio);
