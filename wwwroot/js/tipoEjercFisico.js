@@ -1,3 +1,6 @@
+
+
+
 window.onload = ListadoTipoEjercicios();
 
 function ListadoTipoEjercicios(){
@@ -15,13 +18,12 @@ function ListadoTipoEjercicios(){
                     <tr>
                         <td>${tipoEjercFisico.nombre}</td>
                         <td class="text-center">
-                            <button type="button" class="btn btn-success" onclick="AbrirModalEditar(${tipoEjercFisico.tipoEjercFisicoID})">
-                                Editar
-                            </button>
+                            <button type="button" onclick="AbrirModalEditar(${tipoEjercFisico.tipoEjercFisicoID})">
+                            <i class="fa-solid fa-pen-nib" style="color: #B300FC;"></i></button>
                         </td>
                         <td class="text-center">
-                            <button type="button" class="btn btn-danger" onclick="EliminarRegistro(${tipoEjercFisico.tipoEjercFisicoID})">
-                                Eliminar
+                            <button type="button" onclick="EliminarRegistro(${tipoEjercFisico.tipoEjercFisicoID})">
+                            <i class="fa-solid fa-poo" style="color: #820d19;"></i>
                             </button>
                         </td>
                     </tr>
@@ -84,17 +86,39 @@ function GuardarRegistro(){
     });    
 }
 
-function EliminarRegistro(tipoEjercFisicoID){
-    $.ajax({
-        url: '../../TipoEjercFisicos/EliminarTipoEjercicio',
-        data: {tipoEjercFisicoID : tipoEjercFisicoID},
-        type: 'POST',
-        dataType: 'json',
-        success: function (resultado) {           
-            ListadoTipoEjercicios();
-        },
-        error: function (xhr, status) {
-            console.log('Disculpe, existió un problema al eliminar el registro.');
+
+function EliminarRegistro(tipoEjercFisicoID) {
+    Swal.fire({
+        title: "¿Seguro de eliminar?",
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: '../../TipoEjercFisicos/EliminarTipoEjercicio',
+                data: { tipoEjercFisicoID: tipoEjercFisicoID },
+                type: 'POST',
+                dataType: 'json',
+                success: function (resultado) {
+                    Swal.fire({
+                        title: "¡Eliminado!",
+                        icon: "success"
+                    });
+                    ListadoTipoEjercicios();
+                },
+                error: function (xhr, status) {
+                    console.log('Disculpe, existió un problema al eliminar el registro.');
+                    Swal.fire({
+                        title: "Error",
+                        text: "Hubo un problema al eliminar el registro.",
+                        icon: "error"
+                    });
+                }
+            });
         }
-    });    
+    });
 }
+

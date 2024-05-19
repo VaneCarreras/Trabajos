@@ -1,8 +1,11 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Trabajos.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Trabajos.Controllers;
+
+[Authorize]
 
 public class HomeController : Controller
 {

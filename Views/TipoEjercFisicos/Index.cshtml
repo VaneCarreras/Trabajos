@@ -1,26 +1,44 @@
-﻿@{
+﻿
+@{
     ViewData["Title"] = "Tipo de Ejercicio Físico";
 }
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
+<body class="body2">
 <div class="text-center">
     <h1 class="display-4 letra">Tipo de Ejercicio Físico</h1>
 </div>
 
 <!-- Button trigger modal -->
 <div class="mb-2">
-  <button type="button" class="btn btn-primary" onclick="NuevoRegistro()" data-bs-toggle="modal" data-bs-target="#ModalTipoEjercFisico">
+  <button type="button" class="btn btn-secondary" onclick="NuevoRegistro()" data-bs-toggle="modal" data-bs-target="#ModalTipoEjercFisico">
     Nuevo Registro
   </button>
 </div>
 
+<table class="table table-dark table-borderedless table-striped table-condensed">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th style="width: 70px"></th>
+      <th style="width: 70px"></th>
+    </tr>
+  </thead>
+  <tbody  id="tbody-tipoejercicios">
+  </tbody>
+</table>
+
+
+
 
 <!-- Modal -->
 <div class="modal fade" id="ModalTipoEjercFisico" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="ModalTitulo"></h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content bg-secondary">
+      <div class="modal-header bg-dark text-white">
+        <h5 class="modal-title" id="ModalTitulo">Nuevo Tipo de Ejercicio Físico</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <form>
@@ -33,24 +51,21 @@
       </div>
       <div class="modal-footer">
         <button type="button" onclick="LimpiarModal()" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-        <button type="button" onclick="GuardarRegistro()" class="btn btn-primary">Guardar</button>
+        <button type="button" onclick="GuardarRegistro()" class="btn btn-warning">Guardar</button>
       </div>
     </div>
   </div>
 </div>
 
-<table class="table table-light table-bordered table-striped table-condensed">
-  <thead>
-    <tr>
-      <th>Nombre</th>
-      <th style="width: 70px"></th>
-      <th style="width: 70px"></th>
-    </tr>
-  </thead>
-  <tbody id="tbody-tipoejercicios">
-  </tbody>
-</table>
+
+
+
+
 
 @section Scripts {
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+
   <script src="~/js/tipoEjercFisico.js"></script>
 }
+
+</body>

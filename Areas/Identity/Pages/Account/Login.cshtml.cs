@@ -115,7 +115,9 @@ namespace Trabajos.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
-                    return LocalRedirect(returnUrl);
+                    //return LocalRedirect(returnUrl);
+                    return RedirectToAction ("Index", "Home");
+
                 }
                 if (result.RequiresTwoFactor)
                 {
