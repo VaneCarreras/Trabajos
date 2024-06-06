@@ -8,6 +8,25 @@
 <div class="text-center letra">
   <h1 class="display-4">Ejercicios Físicos</h1>
 </div>
+<div class="row">
+<div class="mb-3 col-3">
+  <label for="FechaInicioBuscar" class="form-label">Inicio</label>
+  <input type="datetime-local" id="FechaInicioBuscar" class="form-control" value="@DateTime.Now.Date.ToString("yyyy-MM-ddTHH:mm")" />
+</div>
+<div class="mb-3 col-3">
+  <label for="FechaFinBuscar" class="form-label">Fin</label>
+  <input type="datetime-local" id="FechaFinBuscar" class="form-control" value="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")" />
+</div>
+<div class="mb-3 col-3">
+  <label for="TipoEjercFisicoBuscarID" class="form-label">Tipo de Ejercicio</label>
+  @Html.DropDownList("TipoEjercFisicoBuscarID", null, htmlAttributes: new { @class = "form-control" })
+</div>
+<div class="mb-3 col-3">
+  <button style="margin-top: 32px;" type="button" class="btn btn-secondary" onclick="ListadoEjercicios()">
+    Filtrar
+  </button>
+</div>
+</div>
 
 <!-- Button trigger modal -->
 <div class="mb-2">
@@ -88,9 +107,12 @@
   </tbody>
 </table>
 
+
+
 @section Scripts {
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
   <script src="~/js/ejercFisico.js"></script>
 }
+
 
 </body>

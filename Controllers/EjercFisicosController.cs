@@ -45,16 +45,34 @@ namespace Trabajos.Controllers;
         ViewBag.EstadoEmocionalFin = selectListItems.OrderBy(t => t.Text).ToList();
 
         var tipoEjercicios = _context.TipoEjercFisicos.ToList();
+        var tiposEjercFisicosBuscar = tipoEjercicios.ToList();
+
         tipoEjercicios.Add(new TipoEjercFisico{TipoEjercFisicoID = 0, Nombre = "[SELECCIONE...]"});
         ViewBag.TipoEjercFisicoID = new SelectList(tipoEjercicios.OrderBy(c => c.Nombre), "TipoEjercFisicoID", "Nombre");
+
+        // ViewBag.TipoEjercFisicoBuscarID = new SelectList(tipoEjercicios.OrderBy(c => c.Nombre), "TipoEjercFisicoID", "Nombre");
+        tiposEjercFisicosBuscar.Add(new TipoEjercFisico { TipoEjercFisicoID = 0, Nombre = "[TODOS LOS TIPOS DE EJERCICIOS]" });
+        ViewBag.TipoEjercFisicoBuscarID = new SelectList(tiposEjercFisicosBuscar.OrderBy(c => c.Nombre), "TipoEjercFisicoID", "Nombre");
 
         return View();
     }
 
-    public JsonResult ListadoEjercicios(int? id)
+    public JsonResult ListadoEjercicios(int? id, DateTime? FechaInicioBuscar, DateTime? FechaFinBuscar, int? TipoEjercFisicoBuscarID)
     {
+        var fechaInicioBuscar = FechaInicioBuscar;
+        var fechaFinBuscar = FechaFinBuscar;
+        var tipoEjercFisicoBuscarID = TipoEjercFisicoBuscarID;
+
+        
         //DEFINIMOS UNA VARIABLE EN DONDE GUARDAMOS EL LISTADO COMPLETO DE EJERCICIOS
         var ejercicios = _context.EjercFisicos.Include(t => t.TipoEjercFisico).ToList();
+
+        if (fechaInicioBuscar != null && fechaFinBuscar != null && tipoEjercFisicoBuscarID != null &&  tipoEjercFisicoBuscarID !=0)
+        {
+            ejercicios = ejercicios.Where(e => e.Inicio >= fechaInicioBuscar && e.Inicio <= fechaFinBuscar && e.TipoEjercFisicoID == TipoEjercFisicoBuscarID).ToList();
+
+        }
+
 
         //LUEGO PREGUNTAMOS SI EL USUARIO INGRESO UN ID
         //QUIERE DECIR QUE QUIERE UN EJERCICIO EN PARTICULAR

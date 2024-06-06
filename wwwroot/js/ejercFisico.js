@@ -1,9 +1,14 @@
+
 window.onload = ListadoEjercicios();
 
 function ListadoEjercicios(){
+    var fechaInicioBuscar = $('#FechaInicioBuscar').val();
+    var fechaFinBuscar = $('#FechaFinBuscar').val();
+    var tipoEjercFisicoBuscarID = $('#TipoEjercFisicoBuscarID').val();
+
     $.ajax({
         url: '../../EjercFisicos/ListadoEjercicios',
-        data: {},
+        data: {FechaInicioBuscar: fechaInicioBuscar, FechaFinBuscar: fechaFinBuscar, TipoEjercFisicoBuscarID: tipoEjercFisicoBuscarID},
         type: 'POST',
         dataType: 'json',
         success: function (vistaEjercicioFisico) {
@@ -141,3 +146,6 @@ function EliminarRegistro(EjercicioFisicoID) {
         }
     });
 }
+
+
+
