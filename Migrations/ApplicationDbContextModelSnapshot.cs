@@ -244,6 +244,9 @@ namespace Trabajos.Migrations
                     b.Property<DateTime>("Inicio")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("LugarID")
+                        .HasColumnType("int");
+
                     b.Property<string>("Observaciones")
                         .HasColumnType("nvarchar(max)");
 
@@ -252,9 +255,27 @@ namespace Trabajos.Migrations
 
                     b.HasKey("EjercicioFisicoID");
 
+                    b.HasIndex("LugarID");
+
                     b.HasIndex("TipoEjercFisicoID");
 
                     b.ToTable("EjercFisicos");
+                });
+
+            modelBuilder.Entity("Trabajos.Models.Lugar", b =>
+                {
+                    b.Property<int>("LugarID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("LugarID"));
+
+                    b.Property<string>("Nombre")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("LugarID");
+
+                    b.ToTable("Lugares");
                 });
 
             modelBuilder.Entity("Trabajos.Models.TipoEjercFisico", b =>
@@ -329,13 +350,26 @@ namespace Trabajos.Migrations
 
             modelBuilder.Entity("Trabajos.Models.EjercFisico", b =>
                 {
+                    b.HasOne("Trabajos.Models.Lugar", "Lugar")
+                        .WithMany("EjerciciosFisicos")
+                        .HasForeignKey("LugarID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Trabajos.Models.TipoEjercFisico", "TipoEjercFisico")
                         .WithMany("EjerciciosFisicos")
                         .HasForeignKey("TipoEjercFisicoID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Lugar");
+
                     b.Navigation("TipoEjercFisico");
+                });
+
+            modelBuilder.Entity("Trabajos.Models.Lugar", b =>
+                {
+                    b.Navigation("EjerciciosFisicos");
                 });
 
             modelBuilder.Entity("Trabajos.Models.TipoEjercFisico", b =>

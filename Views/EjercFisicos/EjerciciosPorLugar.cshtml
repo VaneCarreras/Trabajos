@@ -1,43 +1,57 @@
 @{
-  ViewData["Title"] = "Ejercicios";
+  ViewData["Title"] = "Lugares";
 }
+
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 
 <body class="body2">
 
 <div class="text-center letra">
-  <h1 class="display-4">Ejercicios Físicos</h1>
-</div>
-<div class="row">
-<div class="mb-3 col-3">
-  <label for="FechaInicioBuscar" class="form-label">Inicio</label>
-  <input type="datetime-local" id="FechaInicioBuscar" class="form-control" value="@DateTime.Now.Date.ToString("yyyy-MM-ddTHH:mm")" />
-</div>
-<div class="mb-3 col-3">
-  <label for="FechaFinBuscar" class="form-label">Fin</label>
-  <input type="datetime-local" id="FechaFinBuscar" class="form-control" value="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")" />
-</div>
-<div class="mb-3 col-3">
-  <label for="TipoEjercFisicoBuscarID" class="form-label">Tipo de Ejercicio</label>
-  @Html.DropDownList("TipoEjercFisicoBuscarID", null, htmlAttributes: new { @class = "form-control" })
-</div>
-<div class="mb-3 col-3">
-  <button style="margin-top: 32px;" type="button" class="btn btn-secondary" onclick="ListadoEjercicios()">
-    Filtrar
-  </button>
-</div>
+  <h1 class="display-4">Ejercicios Físicos por Lugar</h1>
 </div>
 
-<!-- Button trigger modal -->
-<div class="mb-2">
-  <button type="button" class="btn btn-secondary" onclick="NuevoRegistro()" data-bs-toggle="modal"
-    data-bs-target="#ModalEjercFisico">
-    Nuevo Registro
-  </button>
+<div class="row mb-3">
+  <div class="col-md-2">
+    <label class="form-label">Desde</label>
+    <input type="datetime-local" id="FechaDesdeBuscar" onchange="ListadoEjercicios()" class="form-control"
+      value="@DateTime.Now.ToString("yyyy-MM-dd HH:mm")" />
+  </div>
+  <div class="col-md-2">
+    <label class="form-label">Hasta</label>
+    <input type="datetime-local" id="FechaHastaBuscar" onchange="ListadoEjercicios()" class="form-control"
+      value="@DateTime.Now.ToString("yyyy-MM-dd HH:mm")" />
+  </div>
 </div>
 
 
-<!-- Modal -->
+  @* <button type="button" class="btn btn-success" onclick="NuevoRegistro()" data-bs-toggle="modal"
+    data-bs-target="#ModalEjercicioFisico">
+    <i class="fa-solid fa-square-plus"></i> Nuevo
+  </button> *@
+
+
+
+<div class="table-wrapper">
+<table id="tabla-imprimir" class="table text-center table-dark table-borderedless table-striped table-condensed">
+  <thead>
+    <tr>
+      <th class="anchoCelda">Lugar</th>
+      <th class="text-center anchoCelda">Tipo</th>
+
+      <th class="text-center anchoCelda">Inicio</th>
+      <th class="text-center anchoCelda">Fin</th>
+      <th class="text-center anchoCelda">Duración</th>
+      @* <th class="anchoCelda">Estado Emocional Inicio</th>
+      <th class="anchoCelda">Estado Emocional Fin</th> *@
+      <th class="anchoCelda">Observaciones</th>
+    </tr>
+  </thead>
+  <tbody id="tbody-ejerciciosfisicos">
+  </tbody>
+</table>
+</div>
+
+@* <!-- Modal -->
 <div class="modal fade" id="ModalEjercFisico" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content bg-secondary">
@@ -92,33 +106,14 @@
       </div>
     </div>
   </div>
-</div>
-
-
-<table class="table text-center table-dark table-borderedless table-striped table-condensed">
-  <thead>
-    <tr>
-      <th>Tipo</th>
-      <th>Inicio</th>
-      <th>Estado Emocional Inicio</th>
-      <th>Fin</th>
-      <th>Estado Emocional Fin</th>
-      <th>Observaciones</th>
-      <th>Lugar</th>
-      <th style="width: 70px"></th>
-      <th style="width: 70px"></th>
-    </tr>
-  </thead>
-  <tbody id="tbody-ejercicio">
-  </tbody>
-</table>
-
-
+</div> *@
 
 @section Scripts {
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
-  <script src="~/js/ejercFisico.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+
+ @* <script src="~/js/ejercFisico.js"></script> *@
+  <script src="~/js/ejerciciosPorLugar.js"></script>
 }
 
-
+  
 </body>

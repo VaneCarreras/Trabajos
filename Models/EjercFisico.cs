@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.RegularExpressions;
 using Trabajos.Models;
 
 namespace Trabajos.Models
@@ -10,6 +11,7 @@ namespace Trabajos.Models
         public int EjercicioFisicoID { get; set; }
 
         public int TipoEjercFisicoID { get; set; }
+        public int LugarID { get; set; }
         public DateTime Inicio { get; set; }
         public DateTime Fin { get; set; }
 
@@ -21,6 +23,7 @@ namespace Trabajos.Models
         public string? Observaciones {get; set; }
 
         public virtual TipoEjercFisico TipoEjercFisico { get; set; }
+        public virtual Lugar Lugar { get; set; }
     }
 
     public enum EstadoEmocional{
@@ -57,16 +60,21 @@ namespace Trabajos.Models
     {   
         public int EjercicioFisicoID { get; set; }
         public int TipoEjercFisicoID { get; set; }
+        public int LugarID { get; set; }
+
         public string? TipoEjercFisicoNombre {get; set; }
         public DateTime Inicio { get; set; }
         public string? InicioNombre { get; set; }
         public DateTime Fin { get; set; }
         public string? FinNombre { get; set; }
+        public TimeSpan IntervaloEjercicio { get; set; }
+
         public EstadoEmocional EstadoEmocionalInicio {get; set; } 
         public string? EstadoEmocionalInicioNombre {get; set; }
         public EstadoEmocional EstadoEmocionalFin {get; set; } 
         public string? EstadoEmocionalFinNombre {get; set; }
         public string? Observaciones {get; set; }
+        public string? LugarNombre { get; set; }
     }
 
     public class VistaPorDiaEjercicioFisico
@@ -76,5 +84,14 @@ namespace Trabajos.Models
         public int? Dia { get; set; }
         public int CantidadMinutos { get; set; }
     }
+
+    public class Informe{
+        public int TipoEjercFisicoID { get; set; }
+
+        public string? TipoEjercFisicoNombre {get; set; }
+
+        public Group? Grupo {get; set; }
+    }
+
 
     }

@@ -5,7 +5,7 @@
 namespace Trabajos.Migrations
 {
     /// <inheritdoc />
-    public partial class actualizacionNombres : Migration
+    public partial class Migracion1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

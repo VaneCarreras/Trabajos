@@ -31,8 +31,19 @@
                             <a class="nav-link" asp-area="" asp-controller="TipoEjercFisicos" asp-action="Index">Tipo de Ejercicio Físico</a>
                         </li>
                         <li class="nav-item">
+                            <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Lugares" asp-action="Index">Lugar</a>
+                        </li>
                             <a class="nav-link" asp-area="" asp-controller="EjercFisicos" asp-action="Index">Ejercicio Físico</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="EjercFisicos" asp-action="EjerciciosPorTipo">Informe Parcial</a>
+                        </li>
+                        
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="EjercFisicos" asp-action="EjerciciosPorLugar">Informe Recuperatorio</a>
+                        </li>
+
                     </ul>
                     
                     <partial name="_LoginPartial" />

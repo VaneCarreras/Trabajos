@@ -5,7 +5,7 @@
 namespace Trabajos.Migrations
 {
     /// <inheritdoc />
-    public partial class agregueenmodelodeejercfisico : Migration
+    public partial class Migracion2 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

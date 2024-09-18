@@ -13,7 +13,7 @@ Full Font Awesome Free license: https://fontawesome.com/license/free.
 # Icons: CC BY 4.0 License (https://creativecommons.org/licenses/by/4.0/)
 
 The Font Awesome Free download is licensed under a Creative Commons
-Attribution 4.0 International License and applies to all icons packaged
+Attribution 4.0 national License and applies to all icons packaged
 as SVG and JS file types.
 
 --------------------------------------------------------------------------------

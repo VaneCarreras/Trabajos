@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Trabajos.Migrations
 {
     /// <inheritdoc />
-    public partial class MigracionInicial : Migration
+    public partial class MigracionCero : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -48,6 +48,19 @@ namespace Trabajos.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Lugares",
+                columns: table => new
+                {
+                    LugarID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Lugares", x => x.LugarID);
                 });
 
             migrationBuilder.CreateTable(
@@ -177,6 +190,7 @@ namespace Trabajos.Migrations
                     EjercicioFisicoID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TipoEjercFisicoID = table.Column<int>(type: "int", nullable: false),
+                    LugarID = table.Column<int>(type: "int", nullable: false),
                     Inicio = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Fin = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EstadoEmocionalInicio = table.Column<int>(type: "int", nullable: false),
@@ -186,6 +200,12 @@ namespace Trabajos.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_EjercFisicos", x => x.EjercicioFisicoID);
+                    table.ForeignKey(
+                        name: "FK_EjercFisicos_Lugares_LugarID",
+                        column: x => x.LugarID,
+                        principalTable: "Lugares",
+                        principalColumn: "LugarID",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_EjercFisicos_TipoEjercFisicos_TipoEjercFisicoID",
                         column: x => x.TipoEjercFisicoID,
@@ -234,6 +254,11 @@ namespace Trabajos.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_EjercFisicos_LugarID",
+                table: "EjercFisicos",
+                column: "LugarID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_EjercFisicos_TipoEjercFisicoID",
                 table: "EjercFisicos",
                 column: "TipoEjercFisicoID");
@@ -265,6 +290,9 @@ namespace Trabajos.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Lugares");
 
             migrationBuilder.DropTable(
                 name: "TipoEjercFisicos");

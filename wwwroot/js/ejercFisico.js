@@ -24,6 +24,8 @@ function ListadoEjercicios(){
                         <td>${ejercFisico.finNombre}</td>
                         <td>${ejercFisico.estadoEmocionalFinNombre}</td>
                         <td>${ejercFisico.observaciones}</td>
+                        <td>${ejercFisico.lugarNombre}</td>
+
                         <td class="text-center">
                             <button type="button" onclick="AbrirModalEditar(${ejercFisico.ejercicioFisicoID})">
                             <i class="fa-solid fa-pen-nib" style="color: #B300FC;"></i>
@@ -45,6 +47,8 @@ function ListadoEjercicios(){
     });
 }
 
+
+
 function LimpiarModal(){
     document.getElementById("EjercicioFisicoID").value = 0;
     document.getElementById("TipoEjercFisicoID").selectedIndex = 0; // Limpiar selección
@@ -53,6 +57,8 @@ function LimpiarModal(){
     document.getElementById("EstadoEmocionalInicio").selectedIndex = 0; // Limpiar selección
     document.getElementById("EstadoEmocionalFin").selectedIndex = 0; // Limpiar selección
     document.getElementById("observaciones").value = "";
+    document.getElementById("LugarID").value = 0;
+
 }
 
 function NuevoRegistro(){
@@ -75,6 +81,8 @@ function AbrirModalEditar(EjercicioFisicoID){
             document.getElementById("EstadoEmocionalInicio").value = ejercFisico.estadoEmocionalInicio;
             document.getElementById("EstadoEmocionalFin").value = ejercFisico.estadoEmocionalFin;
             document.getElementById("observaciones").value = ejercFisico.observaciones;
+            document.getElementById("LugarID").value = ejercFisico.lugarID;
+
             $("#ModalEjercFisico").modal("show");
         },
         error: function (xhr, status) {
@@ -91,11 +99,13 @@ function GuardarRegistro(){
     let estadoEmocionalInicio = document.getElementById("EstadoEmocionalInicio").value;
     let estadoEmocionalFin = document.getElementById("EstadoEmocionalFin").value;
     let observaciones = document.getElementById("observaciones").value;
+    let lugarID = document.getElementById("LugarID").value;
+
     console.log(observaciones);
     $.ajax({
         url: '../../EjercFisicos/AgregarUnEjercFisico',
         data: { EjercicioFisicoID: ejercicioFisicoID, TipoEjercFisicoID: tipoEjercFisicoID, Inicio: inicio, 
-            Fin: fin, EstadoEmocionalInicio: estadoEmocionalInicio, EstadoEmocionalFin: estadoEmocionalFin, observaciones: observaciones},
+            Fin: fin, EstadoEmocionalInicio: estadoEmocionalInicio, EstadoEmocionalFin: estadoEmocionalFin, observaciones: observaciones, LugarID: lugarID},
         type: 'POST',
         dataType: 'json',
         success: function (resultado) {
@@ -146,6 +156,7 @@ function EliminarRegistro(EjercicioFisicoID) {
         }
     });
 }
+
 
 
 
